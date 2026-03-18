@@ -66,6 +66,6 @@ public abstract class Libro {
         this.precio = precio;
     }
     
-    public abstract int precioLibro();
+    public abstract String descripcionLibro();
 
 }

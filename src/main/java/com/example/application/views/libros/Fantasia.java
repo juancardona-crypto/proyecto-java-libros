@@ -10,7 +10,6 @@ public abstract class Fantasia extends Libro {
         
     }
 
-    
     public String getTipoMundo() {
         return tipoMundo;
     }
@@ -18,7 +17,8 @@ public abstract class Fantasia extends Libro {
     public void setTipoMundo(String tipoMundo) {
         this.tipoMundo = tipoMundo;
     }
-    
+
+
     @Override
-    public abstract int precioLibro();
+    public abstract String descripcionLibro();
 }
