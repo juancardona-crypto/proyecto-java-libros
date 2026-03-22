@@ -1,10 +1,11 @@
 package com.example.application.views.libros;
 
-public abstract class Fantasia extends Libro {
+public class LibroFantasia extends Libro {
 
     String tipoMundo;
+    
 
-    public Fantasia(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio) {
+    public LibroFantasia(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoMundo) {
         super(titulo, id, genero, autor, cantidadPaginas, precio);
         this.tipoMundo = tipoMundo;
         
@@ -20,5 +21,7 @@ public abstract class Fantasia extends Libro {
 
 
     @Override
-    public abstract String descripcionLibro();
+    public String descripcionLibro(){
+        return "";
+    }
 }
