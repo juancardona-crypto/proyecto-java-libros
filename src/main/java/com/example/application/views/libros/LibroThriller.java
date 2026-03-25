@@ -4,8 +4,8 @@ public class LibroThriller extends Libro {
 
     String tipoThriller;
 
-    public LibroThriller(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoThriller) {
-        super(titulo, id, genero, autor, cantidadPaginas, precio);
+    public LibroThriller(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl , String tipoThriller){
+        super(titulo, id, genero, autor, cantidadPaginas, precio, imagenUrl);
         this.tipoThriller = tipoThriller;
     }
 

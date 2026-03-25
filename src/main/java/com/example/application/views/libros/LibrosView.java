@@ -200,10 +200,10 @@ public class LibrosView extends VerticalLayout {
         String especifico = campoEspecifico.getValue();
 
         Libro libro = switch (generoVal) {
-            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico);
-            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico);
-            case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico);
-            case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico);
+            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
+            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
+            case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
+            case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
             default -> {
                 Notification.show("Género aún no disponible, será agregado próximamente.");
                 yield null;

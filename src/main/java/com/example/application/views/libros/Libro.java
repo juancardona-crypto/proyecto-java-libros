@@ -7,14 +7,16 @@ public abstract class Libro {
     String autor;
     int cantidadPaginas;
     double precio;
-
-    public Libro(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio){
+    String imagenUrl;
+    public Libro(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl){
         this.titulo = titulo;
         this.id = id;
         this.genero = genero;
         this.autor = autor;
         this.cantidadPaginas = cantidadPaginas;
         this.precio = precio;
+        this.imagenUrl = imagenUrl;
+
 
     }
 
