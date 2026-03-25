@@ -32,6 +32,7 @@ public class LibrosView extends VerticalLayout {
     private final NumberField precio = new NumberField("Precio");
     private final ComboBox<String> genero = new ComboBox<>("Género");
     private final TextField campoEspecifico = new TextField();
+    private final TextField imagenUrl = new TextField("URL de la imagen (opcional(obligatorio))");
     private final FormLayout formLayout = new FormLayout();
 
     private final FlexLayout catalogoGrid = new FlexLayout();
@@ -170,7 +171,7 @@ public class LibrosView extends VerticalLayout {
         );
         genero.addValueChangeListener(e -> actualizarCampoEspecifico(e.getValue()));
         campoEspecifico.setVisible(false);
-        formLayout.add(titulo, id, autor, cantidadPaginas, precio, genero, campoEspecifico);
+        formLayout.add(titulo, id, autor, cantidadPaginas, precio, genero, campoEspecifico, imagenUrl);
     }
 
     private void actualizarCampoEspecifico(String generoSeleccionado) {
@@ -192,7 +193,8 @@ public class LibrosView extends VerticalLayout {
 
     private void guardarLibro() {
         String generoVal = genero.getValue();
-        if (generoVal == null || titulo.isEmpty() || autor.isEmpty()) {
+        if (generoVal == null || titulo.isEmpty() || autor.isEmpty() ||
+    cantidadPaginas.getValue() == null || precio.getValue() == null) {
             Notification.show("Por favor completá todos los campos obligatorios.");
             return;
         }
@@ -200,10 +202,10 @@ public class LibrosView extends VerticalLayout {
         String especifico = campoEspecifico.getValue();
 
         Libro libro = switch (generoVal) {
-            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
-            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
-            case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
-            case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, especifico);
+            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
             default -> {
                 Notification.show("Género aún no disponible, será agregado próximamente.");
                 yield null;
@@ -227,79 +229,44 @@ public class LibrosView extends VerticalLayout {
         genero.clear();
         campoEspecifico.clear();
         campoEspecifico.setVisible(false);
+        imagenUrl.clear();
     }
 
     // -------------------------------------------------------
     // ESTILOS CSS
     // -------------------------------------------------------
     private void inyectarEstilos() {
-        getElement().executeJs(
-            "const style = document.createElement('style');" +
-            "style.textContent = `" +
-            "  .libro-cover {" +
-            "    height: 140px;" +
-            "    display: flex;" +
-            "    align-items: center;" +
-            "    justify-content: center;" +
-            "    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" +
-            "  }" +
-            "  .libro-emoji { font-size: 3.5rem; }" +
-            "  .libro-content {" +
-            "    padding: 16px;" +
-            "    flex: 1;" +
-            "    display: flex;" +
-            "    flex-direction: column;" +
-            "    gap: 8px;" +
-            "  }" +
-            "  .genero-badge {" +
-            "    font-size: 0.7rem;" +
-            "    font-weight: 700;" +
-            "    text-transform: uppercase;" +
-            "    letter-spacing: 1px;" +
-            "    padding: 3px 10px;" +
-            "    border-radius: 20px;" +
-            "    background: #e0e7ff;" +
-            "    color: #4338ca;" +
-            "    align-self: flex-start;" +
-            "  }" +
-            "  .libro-titulo {" +
-            "    margin: 4px 0 0 0;" +
-            "    font-size: 1.05rem;" +
-            "    font-weight: 700;" +
-            "    line-height: 1.3;" +
-            "  }" +
-            "  .libro-autor {" +
-            "    margin: 0;" +
-            "    font-size: 0.85rem;" +
-            "    color: var(--lumo-secondary-text-color);" +
-            "  }" +
-            "  .libro-info-row { gap: 8px; flex-wrap: wrap; }" +
-            "  .libro-info-chip {" +
-            "    font-size: 0.75rem;" +
-            "    padding: 2px 10px;" +
-            "    border-radius: 12px;" +
-            "    background: var(--lumo-contrast-5pct);" +
-            "    color: var(--lumo-secondary-text-color);" +
-            "  }" +
-            "  .libro-precio-row {" +
-            "    display: flex;" +
-            "    align-items: center;" +
-            "    justify-content: space-between;" +
-            "    margin-top: auto;" +
-            "    padding-top: 12px;" +
-            "    border-top: 1px solid var(--lumo-contrast-10pct);" +
-            "  }" +
-            "  .libro-precio {" +
-            "    font-size: 1.3rem;" +
-            "    font-weight: 800;" +
-            "    color: #4f46e5;" +
-            "  }" +
-            "  .libro-card:hover {" +
-            "    transform: translateY(-4px);" +
-            "    box-shadow: 0 12px 32px rgba(79,70,229,0.18) !important;" +
-            "  }" +
-            "`;" +
-            "document.head.appendChild(style);"
-        );
-    }
+    getElement().executeJs(
+        "const style = document.createElement('style');" +
+        "style.textContent = `" +
+        "  .libro-cover {" +
+        "    height: 200px;" +
+        "    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" +
+        "    display: flex;" +
+        "    align-items: center;" +
+        "    justify-content: center;" +
+        "    overflow: hidden;" +
+        "  }" +
+        "  .libro-cover-image {" +
+        "    width: 100% !important;" +
+        "    height: 200px !important;" +
+        "    object-fit: cover !important;" +
+        "    display: block !important;" +
+        "    border-radius: 12px 12px 0 0;" +
+        "  }" +
+        "  .libro-emoji {" +
+        "    font-size: 5.5rem;" +
+        "    opacity: 0.9;" +
+        "  }" +
+        "  .libro-content {" +
+        "    padding: 16px;" +
+        "    flex: 1;" +
+        "    display: flex;" +
+        "    flex-direction: column;" +
+        "    gap: 8px;" +
+        "  }" +
+        "`;" +
+        "document.head.appendChild(style);"
+    );
+}
 }

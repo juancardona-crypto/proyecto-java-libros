@@ -5,7 +5,7 @@ public abstract class LibroTerror extends Libro {
 
      String tipoTerror;
 
-    public LibroTerror(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl , String tipoTerror){
+    public LibroTerror(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoTerror, String imagenUrl){
         super(titulo, id, genero, autor, cantidadPaginas, precio, imagenUrl);
         this.tipoTerror = tipoTerror;
         

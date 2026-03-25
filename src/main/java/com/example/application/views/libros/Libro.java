@@ -67,6 +67,14 @@ public abstract class Libro {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public String getImagenUrl() {
+    return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
     
     public abstract String descripcionLibro();
 

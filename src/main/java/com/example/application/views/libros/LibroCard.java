@@ -4,11 +4,13 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+
 
 public class LibroCard extends Div {
 
@@ -17,12 +19,21 @@ public class LibroCard extends Div {
 
         String emoji = getEmojiGenero(libro.getGenero());
 
-        // Cover decorativo
         Div cover = new Div();
         cover.addClassName("libro-cover");
-        Span emojiSpan = new Span(emoji);
-        emojiSpan.addClassName("libro-emoji");
-        cover.add(emojiSpan);
+
+        if (libro.getImagenUrl() != null && !libro.getImagenUrl().isEmpty()) {
+            Image img = new Image(libro.getImagenUrl(), libro.getTitulo());
+            img.getStyle()
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("object-fit", "cover");
+            cover.add(img);
+        } else {
+            Span emojiSpan = new Span(emoji);
+            emojiSpan.addClassName("libro-emoji");
+            cover.add(emojiSpan);
+        }
 
         // Badge de género
         Span generoBadge = new Span(libro.getGenero());
@@ -81,7 +92,7 @@ public class LibroCard extends Div {
             .set("display", "flex")
             .set("flex-direction", "column")
             .set("width", "260px")
-            .set("min-height", "360px")
+            .set("min-height", "420px")
             .set("cursor", "pointer");
     }
 
