@@ -4,7 +4,7 @@ public class LibroBiografia extends Libro {
 
     String pensamiento;
 
-    public LibroBiografia(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String ambientacion){
+    public LibroBiografia(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String ambientacion, String pensamiento){
         super(titulo, id, genero, autor, cantidadPaginas, precio);
         this.pensamiento = pensamiento;
     }

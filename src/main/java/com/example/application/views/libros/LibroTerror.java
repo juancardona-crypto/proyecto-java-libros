@@ -1,11 +1,11 @@
 package com.example.application.views.libros;
 
 
-public abstract class Terror extends Libro {
+public abstract class LibroTerror extends Libro {
 
      String tipoTerror;
 
-    public Terror(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio) {
+    public LibroTerror(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoTerror) {
         super(titulo, id, genero, autor, cantidadPaginas, precio);
         this.tipoTerror = tipoTerror;
         
