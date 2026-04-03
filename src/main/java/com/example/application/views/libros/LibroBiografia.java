@@ -18,7 +18,7 @@ public class LibroBiografia extends Libro {
     }
 
     @Override
-    public String descripcionLibro(){
-        return "";
+    public String descripcionLibro() {
+        return "Biografía de  escrita por " + getAutor();
     }
 }

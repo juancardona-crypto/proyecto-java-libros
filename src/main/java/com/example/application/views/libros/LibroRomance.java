@@ -18,7 +18,7 @@ public class LibroRomance extends Libro {
     }
 
     @Override
-    public String descripcionLibro(){
-        return "";
+    public String descripcionLibro() {
+        return "Una historia de amor " + sentimiento.toLowerCase() + " que te atrapará.";
     }
 }

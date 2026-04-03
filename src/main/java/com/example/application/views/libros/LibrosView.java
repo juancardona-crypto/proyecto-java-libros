@@ -206,6 +206,9 @@ public class LibrosView extends VerticalLayout {
             case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
             case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
             case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Terror"          -> new LibroTerror(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Romance"         -> new LibroRomance(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Biografía"       -> new LibroBiografia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
             default -> {
                 Notification.show("Género aún no disponible, será agregado próximamente.");
                 yield null;
@@ -239,32 +242,28 @@ public class LibrosView extends VerticalLayout {
     getElement().executeJs(
         "const style = document.createElement('style');" +
         "style.textContent = `" +
-        "  .libro-cover {" +
-        "    height: 200px;" +
-        "    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" +
-        "    display: flex;" +
-        "    align-items: center;" +
-        "    justify-content: center;" +
-        "    overflow: hidden;" +
+        "  .libro-card { ... tus estilos actuales ... } " +  // mantén los que ya tenías
+
+        "  .genero-badge {" +
+        "    background: var(--lumo-primary-color);" +
+        "    color: white;" +
+        "    padding: 4px 12px;" +
+        "    border-radius: 9999px;" +
+        "    font-size: 0.8rem;" +
+        "    font-weight: 600;" +
+        "    align-self: flex-start;" +
         "  }" +
-        "  .libro-cover-image {" +
-        "    width: 100% !important;" +
-        "    height: 200px !important;" +
-        "    object-fit: cover !important;" +
-        "    display: block !important;" +
-        "    border-radius: 12px 12px 0 0;" +
+        "  .libro-titulo { margin: 8px 0 4px 0; font-size: 1.1rem; }" +
+        "  .libro-autor { color: var(--lumo-secondary-text-color); margin: 0; }" +
+        "  .libro-info-row { gap: 8px; }" +
+        "  .libro-info-chip {" +
+        "    background: var(--lumo-contrast-10pct);" +
+        "    padding: 2px 10px;" +
+        "    border-radius: 9999px;" +
+        "    font-size: 0.85rem;" +
         "  }" +
-        "  .libro-emoji {" +
-        "    font-size: 5.5rem;" +
-        "    opacity: 0.9;" +
-        "  }" +
-        "  .libro-content {" +
-        "    padding: 16px;" +
-        "    flex: 1;" +
-        "    display: flex;" +
-        "    flex-direction: column;" +
-        "    gap: 8px;" +
-        "  }" +
+        "  .libro-precio-row { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }" +
+        "  .libro-precio { font-size: 1.3rem; font-weight: 700; color: var(--lumo-success-color); }" +
         "`;" +
         "document.head.appendChild(style);"
     );

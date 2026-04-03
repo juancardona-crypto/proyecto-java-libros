@@ -21,7 +21,7 @@ public class LibroFantasia extends Libro {
 
 
     @Override
-    public String descripcionLibro(){
-        return "";
+    public String descripcionLibro() {
+        return "Un mundo " + tipoMundo + " lleno de magia y aventuras épicas.";
     }
 }

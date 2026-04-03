@@ -1,24 +1,20 @@
 package com.example.application.views.libros;
 
 
-public abstract class LibroTerror extends Libro {
+public class LibroTerror extends Libro {
+    private String tipoTerror;
 
-     String tipoTerror;
-
-    public LibroTerror(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoTerror, String imagenUrl){
+    public LibroTerror(String titulo, String id, String genero, String autor,
+                       int cantidadPaginas, double precio, String tipoTerror, String imagenUrl) {
         super(titulo, id, genero, autor, cantidadPaginas, precio, imagenUrl);
         this.tipoTerror = tipoTerror;
-        
-    }
-      public String getTipoMundo() {
-        return tipoTerror;
     }
 
-    public void setTipoMundo(String tipoTerror) {
-        this.tipoTerror = tipoTerror;
-    }
-
+    public String getTipoTerror() { return tipoTerror; }
+    public void setTipoTerror(String tipoTerror) { this.tipoTerror = tipoTerror; }
 
     @Override
-    public abstract String descripcionLibro();
+    public String descripcionLibro() {
+        return "Terror de tipo " + tipoTerror + ". ¡Prepárate para no dormir!";
+    }
 }
