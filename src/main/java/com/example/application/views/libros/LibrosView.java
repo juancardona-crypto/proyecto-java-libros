@@ -26,7 +26,6 @@ import java.util.List;
 public class LibrosView extends VerticalLayout {
 
     private final TextField titulo = new TextField("Título");
-    private final TextField id = new TextField("ID");
     private final TextField autor = new TextField("Autor");
     private final IntegerField cantidadPaginas = new IntegerField("Cantidad de páginas");
     private final NumberField precio = new NumberField("Precio");
@@ -171,7 +170,7 @@ public class LibrosView extends VerticalLayout {
         );
         genero.addValueChangeListener(e -> actualizarCampoEspecifico(e.getValue()));
         campoEspecifico.setVisible(false);
-        formLayout.add(titulo, id, autor, cantidadPaginas, precio, genero, campoEspecifico, imagenUrl);
+        formLayout.add(titulo, autor, cantidadPaginas, precio, genero, campoEspecifico, imagenUrl);
     }
 
     private void actualizarCampoEspecifico(String generoSeleccionado) {
@@ -202,13 +201,13 @@ public class LibrosView extends VerticalLayout {
         String especifico = campoEspecifico.getValue();
 
         Libro libro = switch (generoVal) {
-            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Aventura"        -> new LibroAventura(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Thriller"        -> new LibroThriller(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Terror"          -> new LibroTerror(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Romance"         -> new LibroRomance(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
-            case "Biografía"       -> new LibroBiografia(titulo.getValue(), id.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Fantasía"        -> new LibroFantasia(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Ciencia Ficción" -> new LibroCienciaFiccion(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Aventura"        -> new LibroAventura(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Thriller"        -> new LibroThriller(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Terror"          -> new LibroTerror(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Romance"         -> new LibroRomance(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
+            case "Biografía"       -> new LibroBiografia(titulo.getValue(), generoVal, autor.getValue(), cantidadPaginas.getValue(), precio.getValue(), especifico, imagenUrl.getValue());
             default -> {
                 Notification.show("Género aún no disponible, será agregado próximamente.");
                 yield null;
@@ -225,7 +224,6 @@ public class LibrosView extends VerticalLayout {
 
     private void limpiarFormulario() {
         titulo.clear();
-        id.clear();
         autor.clear();
         cantidadPaginas.clear();
         precio.clear();

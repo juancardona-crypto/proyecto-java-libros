@@ -5,8 +5,8 @@ public class LibroFantasia extends Libro {
     String tipoMundo;
     
 
-    public LibroFantasia(String titulo, String id, String genero, String autor, int cantidadPaginas, double precio, String tipoMundo, String imagenUrl){
-        super(titulo, id, genero, autor, cantidadPaginas, precio, imagenUrl);
+    public LibroFantasia(String titulo, String genero, String autor, int cantidadPaginas, double precio, String tipoMundo, String imagenUrl){
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
         this.tipoMundo = tipoMundo;
         
     }

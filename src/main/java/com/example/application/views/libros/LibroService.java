@@ -9,8 +9,9 @@ import java.util.List;
 public class LibroService {
 
     private final List<Libro> libros = new ArrayList<>();
-
+    private long nextId = 1;
     public void agregarLibro(Libro libro) {
+        libro.setId(nextId++);
         libros.add(libro);
     }
 

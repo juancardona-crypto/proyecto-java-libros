@@ -4,9 +4,9 @@ package com.example.application.views.libros;
 public class LibroTerror extends Libro {
     private String tipoTerror;
 
-    public LibroTerror(String titulo, String id, String genero, String autor,
+    public LibroTerror(String titulo, String genero, String autor,
                        int cantidadPaginas, double precio, String tipoTerror, String imagenUrl) {
-        super(titulo, id, genero, autor, cantidadPaginas, precio, imagenUrl);
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
         this.tipoTerror = tipoTerror;
     }
 
