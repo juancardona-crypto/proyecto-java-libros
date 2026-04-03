@@ -17,7 +17,6 @@ public class LibroCard extends Div {
     public LibroCard(Libro libro) {
         addClassName("libro-card");
 
-        String emoji = getEmojiGenero(libro.getGenero());
 
         Div cover = new Div();
         cover.addClassName("libro-cover");
@@ -30,9 +29,12 @@ public class LibroCard extends Div {
             .set("object-fit", "cover");
             cover.add(img);
         } else {
-            Span emojiSpan = new Span(emoji);
-            emojiSpan.addClassName("libro-emoji");
-            cover.add(emojiSpan);
+            Image placeholderImg = new Image(getPlaceholderImageUrl(libro.getGenero()), libro.getTitulo());
+        placeholderImg.getStyle()
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("object-fit", "cover");
+        cover.add(placeholderImg);
         }
 
         // Badge de género
@@ -96,17 +98,20 @@ public class LibroCard extends Div {
             .set("cursor", "pointer");
     }
 
-    private String getEmojiGenero(String genero) {
-        if (genero == null) return "📚";
-        return switch (genero) {
-            case "Fantasía"        -> "🧙";
-            case "Ciencia Ficción" -> "🚀";
-            case "Aventura"        -> "🗺️";
-            case "Thriller"        -> "🔍";
-            case "Terror"          -> "👻";
-            case "Romance"         -> "💖";
-            case "Biografía"       -> "🎩";
-            default                -> "📚";
-        };
+    private String getPlaceholderImageUrl(String genero) {
+    if (genero == null) {
+        return "https://picsum.photos/id/1015/600/800"; // Imagen genérica de libro
     }
+
+    return switch (genero) {
+        case "Fantasía"        -> "https://escolademagia.com.br/wp-content/uploads/2024/11/2151661289-1024x771.jpg";  
+        case "Ciencia Ficción" -> "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKGM_xfzK3rgbsRi_BCQRd3ZcJv2khJTQcow&s"; 
+        case "Aventura"        -> "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYtrcpclka_DG4_18jzFznBFLqaczxswrriw&s";   
+        case "Thriller"        -> "blob:https://gemini.google.com/a5ce852d-993f-4d78-8a61-739de55020bb";   
+        case "Terror"          -> "https://i.pinimg.com/474x/a1/92/f9/a192f939a853a8a6368692c9ca1fa251.jpg";  
+        case "Romance"         -> "https://thumbs.dreamstime.com/z/una-representaci%C3%B3n-de-la-acuarela-del-amor-matiz-coraz%C3%B3n-un-retrato-capturando-esencia-romance-para-las-celebraciones-d%C3%ADa-san-298173932.jpg";  
+        case "Biografía"       -> "https://us.123rf.com/450wm/fernandocastoldi/fernandocastoldi1803/fernandocastoldi180300059/98983726-viejo-libro-abierto-con-pluma-y-tintero.jpg?ver=6";   
+        default                -> "https://picsum.photos/id/1015/600/800"; 
+    };
+}
 }

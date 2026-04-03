@@ -240,7 +240,7 @@ public class LibrosView extends VerticalLayout {
     getElement().executeJs(
         "const style = document.createElement('style');" +
         "style.textContent = `" +
-        "  .libro-card { ... tus estilos actuales ... } " +  // mantén los que ya tenías
+        "  .libro-card { ... tus estilos actuales ... } " + 
 
         "  .genero-badge {" +
         "    background: var(--lumo-primary-color);" +
