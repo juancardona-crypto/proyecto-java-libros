@@ -8,34 +8,37 @@ public abstract class Libro implements GestionLibro {
     private int cantidadPaginas;
     private double precio;
     private String imagenUrl;
+    private int stock;
 
-    public Libro(String titulo, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl) {
+    public Libro(String titulo, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl, int stock) {
         this.titulo = titulo;
         this.genero = genero;
         this.autor = autor;
         this.cantidadPaginas = cantidadPaginas;
         this.precio = precio;
         this.imagenUrl = imagenUrl;
-
-        
+        this.stock = stock;
     }
+
     public Libro(String titulo, String autor, double precio) {
-    this.titulo = titulo;
-    this.autor = autor;
-    this.precio = precio;
-    this.genero = "No definido";
-    this.cantidadPaginas = 0;
-    this.imagenUrl = "";
-}
-public String obtenerFichaTecnica(boolean incluirImagen) {
-    String ficha = obtenerFichaTecnica();
-
-    if (incluirImagen && imagenUrl != null && !imagenUrl.isEmpty()) {
-        ficha += " | Imagen: " + imagenUrl;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.precio = precio;
+        this.genero = "No definido";
+        this.cantidadPaginas = 0;
+        this.imagenUrl = "";
+        this.stock = 0;
     }
 
-    return ficha;
-}
+    public String obtenerFichaTecnica(boolean incluirImagen) {
+        String ficha = obtenerFichaTecnica();
+
+        if (incluirImagen && imagenUrl != null && !imagenUrl.isEmpty()) {
+            ficha += " | Imagen: " + imagenUrl;
+        }
+
+        return ficha;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -93,13 +96,22 @@ public String obtenerFichaTecnica(boolean incluirImagen) {
         this.imagenUrl = imagenUrl;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String obtenerFichaTecnica() {
         return "Título: " + titulo +
                " | Autor: " + autor +
                " | Género: " + genero +
                " | Páginas: " + cantidadPaginas +
-               " | Precio: $" + precio;
+               " | Precio: $" + precio +
+               " | Stock: " + stock;
     }
 
     @Override

@@ -2,23 +2,24 @@ package com.example.application.views.libros;
 
 public class LibroRomance extends Libro {
 
-    String sentimiento;
+    private String tipoRomance;
 
-    public LibroRomance(String titulo, String genero, String autor, int cantidadPaginas, double precio, String sentimiento, String imagenUrl){
-        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
-        this.sentimiento = sentimiento;
+    public LibroRomance(String titulo, String genero, String autor, int cantidadPaginas, double precio,
+                        String tipoRomance, String imagenUrl, int stock) {
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl, stock);
+        this.tipoRomance = tipoRomance;
     }
 
-    public String getPensamiento(){
-        return sentimiento;
+    public String getTipoRomance() {
+        return tipoRomance;
     }
 
-    public void setSentimiento(String sentimiento){
-        this.sentimiento = sentimiento;
+    public void setTipoRomance(String tipoRomance) {
+        this.tipoRomance = tipoRomance;
     }
 
     @Override
     public String descripcionLibro() {
-        return "Una historia de amor " + sentimiento.toLowerCase() + " que te atrapará.";
+        return "Libro de romance de tipo " + tipoRomance + ".";
     }
 }

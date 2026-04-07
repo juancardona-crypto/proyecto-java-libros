@@ -1,7 +1,6 @@
 package com.example.application.views.libros;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
@@ -13,21 +12,18 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 public class LibroCard extends Div {
 
-    // Paleta de colores premium
-    private static final String COLOR_FONDO_CARD      = "linear-gradient(160deg, #1a1008 0%, #0d0a06 100%)";
-    private static final String COLOR_BORDE_CARD      = "#6b4c1e";
+    private static final String COLOR_FONDO_CARD       = "linear-gradient(160deg, #1a1008 0%, #0d0a06 100%)";
+    private static final String COLOR_BORDE_CARD       = "#6b4c1e";
     private static final String COLOR_DORADO_PRINCIPAL = "#c9a84c";
-    private static final String COLOR_DORADO_CLARO    = "#e8c96d";
-    private static final String COLOR_DORADO_OPACO    = "rgba(201,168,76,0.15)";
+    private static final String COLOR_DORADO_CLARO     = "#e8c96d";
+    private static final String COLOR_DORADO_OPACO     = "rgba(201,168,76,0.15)";
     private static final String COLOR_TEXTO_PRINCIPAL  = "#f0e6d0";
     private static final String COLOR_TEXTO_SECUNDARIO = "#a89070";
-    private static final String COLOR_CAFE_MEDIO      = "#3b2412";
-    private static final String COLOR_CAFE_BORDE      = "#5a3a1a";
+    private static final String COLOR_CAFE_BORDE       = "#5a3a1a";
 
-    public LibroCard(Libro libro, LibroService libroService) {
+    public LibroCard(Libro libro, LibroService libroService, CarritoService carritoService) {
         addClassName("libro-card");
 
-        // ── PORTADA ─────────────────────────────────────────────────────────
         Div cover = new Div();
         cover.addClassName("libro-cover");
         cover.getStyle()
@@ -37,30 +33,22 @@ public class LibroCard extends Div {
             .set("background", "#0d0a06")
             .set("position", "relative");
 
-        // Overlay dorado sutil sobre la imagen
-        Div overlay = new Div();
-        overlay.getStyle()
-            .set("position", "absolute")
-            .set("inset", "0")
-            .set("background", "linear-gradient(to bottom, transparent 50%, rgba(10,7,3,0.85) 100%)")
-            .set("z-index", "1");
-
         if (libro.getImagenUrl() != null && !libro.getImagenUrl().isEmpty()) {
             Image img = new Image(libro.getImagenUrl(), libro.getTitulo());
             img.getStyle()
-            .set("width", "100%")
-            .set("height", "100%")
-            .set("object-fit", "cover");
+                .set("width", "100%")
+                .set("height", "100%")
+                .set("object-fit", "cover");
             cover.add(img);
-        } else {Image placeholderImg = new Image(getPlaceholderImageUrl(libro.getGenero()), libro.getTitulo());
-        placeholderImg.getStyle()
-            .set("width", "100%")
-            .set("height", "100%")
-            .set("object-fit", "contain");
-        cover.add(placeholderImg);
+        } else {
+            Image placeholderImg = new Image(getPlaceholderImageUrl(libro.getGenero()), libro.getTitulo());
+            placeholderImg.getStyle()
+                .set("width", "100%")
+                .set("height", "100%")
+                .set("object-fit", "contain");
+            cover.add(placeholderImg);
         }
 
-        // ── BADGE DE GÉNERO ──────────────────────────────────────────────────
         Span generoBadge = new Span(libro.getGenero());
         generoBadge.getStyle()
             .set("display", "inline-block")
@@ -74,7 +62,6 @@ public class LibroCard extends Div {
             .set("text-transform", "uppercase")
             .set("padding", "3px 10px");
 
-        // ── TÍTULO ───────────────────────────────────────────────────────────
         H3 tituloEl = new H3(libro.getTitulo());
         tituloEl.getStyle()
             .set("margin", "0")
@@ -84,7 +71,6 @@ public class LibroCard extends Div {
             .set("line-height", "1.35")
             .set("letter-spacing", "0.01em");
 
-        // ── AUTOR ────────────────────────────────────────────────────────────
         Paragraph autorEl = new Paragraph();
         autorEl.getElement().setProperty("innerHTML",
             "<span style=\"color:" + COLOR_DORADO_PRINCIPAL + ";font-size:0.75rem;\">✦</span>" +
@@ -92,7 +78,6 @@ public class LibroCard extends Div {
             libro.getAutor() + "</span>");
         autorEl.getStyle().set("margin", "0");
 
-        // ── FICHA TÉCNICA ─────────────────────────────────────────────────────
         Paragraph ficha = new Paragraph(libro.obtenerFichaTecnica());
         ficha.getStyle()
             .set("font-size", "0.78rem")
@@ -104,7 +89,13 @@ public class LibroCard extends Div {
             .set("border-left", "2px solid " + COLOR_BORDE_CARD)
             .set("border-radius", "0 4px 4px 0");
 
-        // ── CHIPS DE INFO ─────────────────────────────────────────────────────
+        Span stockSpan = new Span("Stock disponible: " + libro.getStock());
+        stockSpan.getStyle()
+            .set("color", libro.getStock() > 0 ? "#e8c96d" : "#ff6b6b")
+            .set("font-size", "0.78rem")
+            .set("font-weight", "600")
+            .set("letter-spacing", "0.03em");
+
         HorizontalLayout infoRow = new HorizontalLayout();
         infoRow.getStyle()
             .set("gap", "8px")
@@ -112,17 +103,15 @@ public class LibroCard extends Div {
         infoRow.setSpacing(false);
 
         Span paginas = crearChip("📄 " + libro.getCantidadPaginas() + " págs.");
-        Span idSpan  = crearChip("ID: " + libro.getId());
+        Span idSpan = crearChip("ID: " + libro.getId());
         infoRow.add(paginas, idSpan);
 
-        // ── SEPARADOR DORADO ──────────────────────────────────────────────────
         Div separador = new Div();
         separador.getStyle()
             .set("height", "1px")
             .set("background", "linear-gradient(to right, transparent, " + COLOR_BORDE_CARD + ", transparent)")
             .set("margin", "2px 0");
 
-        // ── PRECIO + BOTÓN ────────────────────────────────────────────────────
         Div precioDiv = new Div();
         precioDiv.getStyle()
             .set("display", "flex")
@@ -147,7 +136,7 @@ public class LibroCard extends Div {
 
         precioWrapper.add(moneda, monto);
 
-        Button btnComprar = new Button("Comprar");
+        Button btnComprar = new Button("Agregar al carrito");
         btnComprar.getStyle()
             .set("background", "linear-gradient(135deg, #b8860b, #c9a84c)")
             .set("color", "#0d0a06")
@@ -163,22 +152,20 @@ public class LibroCard extends Div {
             .set("box-shadow", "0 2px 8px rgba(201,168,76,0.3)");
 
         btnComprar.addClickListener(e -> {
-            boolean comprado = libroService.comprarLibro(libro.getId());
-            Notification notif;
-            if (comprado) {
-                notif = Notification.show("✦ \"" + libro.getTitulo() + "\" adquirido");
+            if (libro.getStock() > 0) {
+                carritoService.agregarLibro(libro);
+                Notification notif = Notification.show("🛒 \"" + libro.getTitulo() + "\" agregado al carrito");
                 notif.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-                this.setVisible(false);
+                notif.setDuration(3000);
             } else {
-                notif = Notification.show("✗ No se pudo completar la compra");
+                Notification notif = Notification.show("❌ No hay stock disponible");
                 notif.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                notif.setDuration(3000);
             }
-            notif.setDuration(3000);
         });
 
         precioDiv.add(precioWrapper, btnComprar);
 
-        // ── CONTENIDO ─────────────────────────────────────────────────────────
         Div content = new Div();
         content.addClassName("libro-content");
         content.getStyle()
@@ -188,9 +175,8 @@ public class LibroCard extends Div {
             .set("gap", "10px")
             .set("flex-grow", "1");
 
-        content.add(generoBadge, tituloEl, autorEl, ficha, infoRow, separador, precioDiv);
+        content.add(generoBadge, tituloEl, autorEl, ficha, stockSpan, infoRow, separador, precioDiv);
 
-        // ── CARD PRINCIPAL ────────────────────────────────────────────────────
         add(cover, content);
 
         getElement().getStyle()
@@ -203,10 +189,9 @@ public class LibroCard extends Div {
             .set("display", "flex")
             .set("flex-direction", "column")
             .set("width", "260px")
-            .set("min-height", "440px")
+            .set("min-height", "460px")
             .set("cursor", "pointer");
 
-        // Hover via JS (Vaadin no tiene :hover nativo en inline styles)
         getElement().addEventListener("mouseover", e ->
             getElement().getStyle()
                 .set("transform", "translateY(-4px)")
@@ -221,7 +206,6 @@ public class LibroCard extends Div {
         );
     }
 
-    // ── HELPER: chip de info ──────────────────────────────────────────────────
     private Span crearChip(String texto) {
         Span chip = new Span(texto);
         chip.getStyle()
