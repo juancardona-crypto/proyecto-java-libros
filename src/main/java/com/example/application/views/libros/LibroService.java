@@ -23,8 +23,7 @@ public class LibroService {
 
     Libro Tormenta = new LibroAventura("Tormenta De Espadas", "Fantasía", "George R.R. Martin", 1127, 120000, "Medieval", "https://www.penguinlibros.com/ar/1640618/tormenta-de-espadas-cancion-de-hielo-y-fuego-3.jpg");
     
-    Libro nombreDelViento = new LibroFantasia(
-                "El Nombre del Viento", "Fantasía", "Patrick Rothfuss", 662, 28900, "Medieval", "https://acdn-us.mitiendanube.com/stores/004/239/068/products/nombredelviento-e6a8de32101507336f17099277865964-1024-1024.webp");
+    Libro nombreDelViento = new LibroFantasia( "El Nombre del Viento", "Fantasía", "Patrick Rothfuss", 662, 28900, "Medieval", "https://acdn-us.mitiendanube.com/stores/004/239/068/products/nombredelviento-e6a8de32101507336f17099277865964-1024-1024.webp");
 
         Libro dune = new LibroCienciaFiccion( "Dune", "Ciencia Ficción", "Frank Herbert", 412, 32500, "Distópico en Arrakis", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_M-tIOhEDno97-IfHWc_G3g5GwAfL3Em4Cw&s");
 
