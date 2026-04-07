@@ -2,13 +2,12 @@ package com.example.application.views.libros;
 
 public class LibroFantasia extends Libro {
 
-    String tipoMundo;
-    
+    private String tipoMundo;
 
-    public LibroFantasia(String titulo, String genero, String autor, int cantidadPaginas, double precio, String tipoMundo, String imagenUrl){
-        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
+    public LibroFantasia(String titulo, String genero, String autor, int cantidadPaginas, double precio,
+                         String tipoMundo, String imagenUrl, int stock) {
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl, stock);
         this.tipoMundo = tipoMundo;
-        
     }
 
     public String getTipoMundo() {
@@ -19,9 +18,8 @@ public class LibroFantasia extends Libro {
         this.tipoMundo = tipoMundo;
     }
 
-
     @Override
     public String descripcionLibro() {
-        return "Un mundo " + tipoMundo + " lleno de magia y aventuras épicas.";
+        return "Libro de fantasía ambientado en un mundo " + tipoMundo + ".";
     }
 }

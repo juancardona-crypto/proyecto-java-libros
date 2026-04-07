@@ -2,23 +2,24 @@ package com.example.application.views.libros;
 
 public class LibroBiografia extends Libro {
 
-    String pensamiento;
+    private String personajeBiografiado;
 
-    public LibroBiografia(String titulo, String genero, String autor, int cantidadPaginas, double precio, String pensamiento,  String imagenUrl){
-        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
-        this.pensamiento = pensamiento;
+    public LibroBiografia(String titulo, String genero, String autor, int cantidadPaginas, double precio,
+                          String personajeBiografiado, String imagenUrl, int stock) {
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl, stock);
+        this.personajeBiografiado = personajeBiografiado;
     }
 
-    public String getPensamiento(){
-        return pensamiento;
+    public String getPersonajeBiografiado() {
+        return personajeBiografiado;
     }
 
-    public void setAmbientacion(String pensamiento){
-        this.pensamiento = pensamiento;
+    public void setPersonajeBiografiado(String personajeBiografiado) {
+        this.personajeBiografiado = personajeBiografiado;
     }
 
     @Override
     public String descripcionLibro() {
-        return "Biografía de  escrita por " + getAutor();
+        return "Biografía de " + personajeBiografiado + ".";
     }
 }

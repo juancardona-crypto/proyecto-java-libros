@@ -2,10 +2,11 @@ package com.example.application.views.libros;
 
 public class LibroThriller extends Libro {
 
-    String tipoThriller;
+    private String tipoThriller;
 
-    public LibroThriller(String titulo, String genero, String autor, int cantidadPaginas, double precio, String tipoThriller, String imagenUrl ){
-        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl);
+    public LibroThriller(String titulo, String genero, String autor, int cantidadPaginas, double precio,
+                         String tipoThriller, String imagenUrl, int stock) {
+        super(titulo, genero, autor, cantidadPaginas, precio, imagenUrl, stock);
         this.tipoThriller = tipoThriller;
     }
 
@@ -19,6 +20,6 @@ public class LibroThriller extends Libro {
 
     @Override
     public String descripcionLibro() {
-        return "";
+        return "Thriller de tipo " + tipoThriller + ".";
     }
 }
