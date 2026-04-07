@@ -16,9 +16,14 @@ public class LibroService {
         libros.add(libro);
     }
 
+    Libro Tormenta = new LibroAventura("Tormenta De Espadas", "Fantasía", "George R.R. Martin", 1127, 120000, "Medieval", "https://www.penguinlibros.com/ar/1640618/tormenta-de-espadas-cancion-de-hielo-y-fuego-3.jpg");
+    
+
     public List<Libro> obtenerTodos() {
+        libros.add(Tormenta);
         return new ArrayList<>(libros);
     }
+    
 
     public List<Libro> obtenerPorGenero(String genero) {
         return libros.stream()

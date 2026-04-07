@@ -45,19 +45,20 @@ public class LibroCard extends Div {
             .set("background", "linear-gradient(to bottom, transparent 50%, rgba(10,7,3,0.85) 100%)")
             .set("z-index", "1");
 
-        String imgUrl = (libro.getImagenUrl() != null && !libro.getImagenUrl().isEmpty())
-            ? libro.getImagenUrl()
-            : getPlaceholderImageUrl(libro.getGenero());
-
-        Image img = new Image(imgUrl, libro.getTitulo());
-        img.getStyle()
+        if (libro.getImagenUrl() != null && !libro.getImagenUrl().isEmpty()) {
+            Image img = new Image(libro.getImagenUrl(), libro.getTitulo());
+            img.getStyle()
             .set("width", "100%")
             .set("height", "100%")
-            .set("object-fit", "cover")
-            .set("opacity", "0.88")
-            .set("transition", "transform 0.4s ease, opacity 0.3s ease");
-
-        cover.add(img, overlay);
+            .set("object-fit", "cover");
+            cover.add(img);
+        } else {Image placeholderImg = new Image(getPlaceholderImageUrl(libro.getGenero()), libro.getTitulo());
+        placeholderImg.getStyle()
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("object-fit", "cover");
+        cover.add(placeholderImg);
+        }
 
         // ── BADGE DE GÉNERO ──────────────────────────────────────────────────
         Span generoBadge = new Span(libro.getGenero());
