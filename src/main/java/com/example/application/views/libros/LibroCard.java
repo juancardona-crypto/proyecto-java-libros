@@ -56,7 +56,7 @@ public class LibroCard extends Div {
         placeholderImg.getStyle()
             .set("width", "100%")
             .set("height", "100%")
-            .set("object-fit", "cover");
+            .set("object-fit", "contain");
         cover.add(placeholderImg);
         }
 
