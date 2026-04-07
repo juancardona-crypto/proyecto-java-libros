@@ -1,14 +1,15 @@
 package com.example.application.views.libros;
 
-public abstract class Libro {
-    String titulo;
-    long id;
-    String genero;
-    String autor;
-    int cantidadPaginas;
-    double precio;
-    String imagenUrl;
-    public Libro(String titulo, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl){
+public abstract class Libro implements GestionLibro {
+    private String titulo;
+    private long id;
+    private String genero;
+    private String autor;
+    private int cantidadPaginas;
+    private double precio;
+    private String imagenUrl;
+
+    public Libro(String titulo, String genero, String autor, int cantidadPaginas, double precio, String imagenUrl) {
         this.titulo = titulo;
         this.genero = genero;
         this.autor = autor;
@@ -16,8 +17,25 @@ public abstract class Libro {
         this.precio = precio;
         this.imagenUrl = imagenUrl;
 
-
+        
     }
+    public Libro(String titulo, String autor, double precio) {
+    this.titulo = titulo;
+    this.autor = autor;
+    this.precio = precio;
+    this.genero = "No definido";
+    this.cantidadPaginas = 0;
+    this.imagenUrl = "";
+}
+public String obtenerFichaTecnica(boolean incluirImagen) {
+    String ficha = obtenerFichaTecnica();
+
+    if (incluirImagen && imagenUrl != null && !imagenUrl.isEmpty()) {
+        ficha += " | Imagen: " + imagenUrl;
+    }
+
+    return ficha;
+}
 
     public String getTitulo() {
         return titulo;
@@ -68,13 +86,22 @@ public abstract class Libro {
     }
 
     public String getImagenUrl() {
-    return imagenUrl;
+        return imagenUrl;
     }
 
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
     }
-    
-    public abstract String descripcionLibro();
 
+    @Override
+    public String obtenerFichaTecnica() {
+        return "Título: " + titulo +
+               " | Autor: " + autor +
+               " | Género: " + genero +
+               " | Páginas: " + cantidadPaginas +
+               " | Precio: $" + precio;
+    }
+
+    @Override
+    public abstract String descripcionLibro();
 }
