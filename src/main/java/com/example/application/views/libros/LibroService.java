@@ -20,6 +20,23 @@ public class LibroService {
     @PostConstruct
     private void cargarLibrosDeEjemplo() {
 
+        Libro tormenta = new LibroAventura(
+                "Tormenta de Espadas",
+                "Fantasía",
+                "George R.R. Martin",
+                1127,
+                120000,
+                "Medieval con batallas épicas",
+                "https://www.penguinlibros.com/ar/1640618/tormenta-de-espadas-cancion-de-hielo-y-fuego-3.jpg", 10);
+
+        Libro nombreDelViento = new LibroFantasia(
+                "El Nombre del Viento",
+                "Fantasía",
+                "Patrick Rothfuss",
+                662,
+                28900,
+                "Medieval",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFlQSeDrbCPJWP6cbwUede8QwhyYTvxFSkqz7ful48oR2EU6I4JYpkzvykZrr9JVe8l67Lv-ae6xCcHzlihu0fcxOWpYFUIzHnSgtIdBU&s=10", 8);
     
 
         Libro dune = new LibroCienciaFiccion(
@@ -106,7 +123,8 @@ public class LibroService {
         agregarLibro(mismaEstrella);
         agregarLibro(jobs);
         agregarLibro(diarioAnaFrank);
-        
+        agregarLibro(tormenta);
+        agregarLibro(nombreDelViento);
         agregarLibro(orgullo);
     }
 

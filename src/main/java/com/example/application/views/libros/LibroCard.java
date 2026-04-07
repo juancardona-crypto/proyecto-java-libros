@@ -113,43 +113,52 @@ public class LibroCard extends Div {
             .set("margin", "2px 0");
 
         Div precioDiv = new Div();
-        precioDiv.getStyle()
-            .set("display", "flex")
-            .set("align-items", "center")
-            .set("justify-content", "space-between")
-            .set("margin-top", "2px");
+precioDiv.getStyle()
+    .set("display", "flex")
+    .set("flex-direction", "column")   // ← Cambiar a columna
+    .set("align-items", "flex-start")  // o "center" si quieres todo centrado
+    .set("gap", "12px")                // espacio entre precio y botón
+    .set("margin-top", "2px");
 
-        Div precioWrapper = new Div();
-        Span moneda = new Span("$");
-        moneda.getStyle()
-            .set("font-size", "0.85rem")
-            .set("color", COLOR_DORADO_PRINCIPAL)
-            .set("font-weight", "600")
-            .set("vertical-align", "super");
+// Precio
+Div precioWrapper = new Div();
+precioWrapper.getStyle()
+    .set("display", "flex")
+    .set("align-items", "baseline")    // para que el $ y el número queden alineados abajo
+    .set("gap", "2px");
 
-        Span monto = new Span(String.format("%.2f", libro.getPrecio()));
-        monto.getStyle()
-            .set("font-size", "1.55rem")
-            .set("font-weight", "800")
-            .set("color", COLOR_DORADO_CLARO)
-            .set("letter-spacing", "-0.01em");
+Span moneda = new Span("$");
+moneda.getStyle()
+    .set("font-size", "0.85rem")
+    .set("color", COLOR_DORADO_PRINCIPAL)
+    .set("font-weight", "600")
+    .set("vertical-align", "super");
 
-        precioWrapper.add(moneda, monto);
+Span monto = new Span(String.format("%.2f", libro.getPrecio()));
+monto.getStyle()
+    .set("font-size", "1.55rem")
+    .set("font-weight", "800")
+    .set("color", COLOR_DORADO_CLARO)
+    .set("letter-spacing", "-0.01em");
 
-        Button btnComprar = new Button("Agregar al carrito");
-        btnComprar.getStyle()
-            .set("background", "linear-gradient(135deg, #b8860b, #c9a84c)")
-            .set("color", "#0d0a06")
-            .set("border", "none")
-            .set("border-radius", "6px")
-            .set("font-weight", "800")
-            .set("font-size", "0.82rem")
-            .set("letter-spacing", "0.05em")
-            .set("padding", "8px 18px")
-            .set("cursor", "pointer")
-            .set("text-transform", "uppercase")
-            .set("transition", "all 0.2s ease")
-            .set("box-shadow", "0 2px 8px rgba(201,168,76,0.3)");
+precioWrapper.add(moneda, monto);
+
+// Botón
+Button btnComprar = new Button("Agregar al carrito");
+btnComprar.getStyle()
+    .set("background", "linear-gradient(135deg, #b8860b, #c9a84c)")
+    .set("color", "#0d0a06")
+    .set("border", "none")
+    .set("border-radius", "6px")
+    .set("font-weight", "800")
+    .set("font-size", "0.82rem")
+    .set("letter-spacing", "0.05em")
+    .set("padding", "8px 18px")
+    .set("cursor", "pointer")
+    .set("text-transform", "uppercase")
+    .set("transition", "all 0.2s ease");
+
+precioDiv.add(precioWrapper, btnComprar);
 
         btnComprar.addClickListener(e -> {
             if (libro.getStock() > 0) {
