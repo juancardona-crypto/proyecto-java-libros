@@ -53,6 +53,9 @@ public abstract class Libro implements GestionLibro {
     }
 
     protected void setId(long id) {
+        if(id < 0) {
+            throw new IllegalArgumentException("El ID no puede ser negativo");
+        }
         this.id = id;
     }
 
