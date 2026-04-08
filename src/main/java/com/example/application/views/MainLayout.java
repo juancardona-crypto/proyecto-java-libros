@@ -40,12 +40,14 @@ public class MainLayout extends AppLayout implements AfterNavigationObserver {
 
         viewTitle = new H1();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
+        viewTitle.getStyle()
+    .set("color", "#c9a84c"); // dorado
 
         addToNavbar(true, toggle, viewTitle);
     }
 
     private void addDrawerContent() {
-        Span appName = new Span("Libros");
+        Span appName = new Span("ReadBooks");
         appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
         Header header = new Header(appName);
 

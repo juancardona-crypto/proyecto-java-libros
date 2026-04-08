@@ -20,7 +20,7 @@ import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
 import java.util.List;
 
-@PageTitle("Librería")
+@PageTitle("ReadBooks")
 @Route("")
 @Menu(order = 0, icon = LineAwesomeIconUrl.FILE)
 public class LibrosView extends VerticalLayout {
