@@ -78,6 +78,15 @@ public class LibroCard extends Div {
             libro.getAutor() + "</span>");
         autorEl.getStyle().set("margin", "0");
 
+        Paragraph descripcionEl = new Paragraph(libro.descripcionLibro());  // ← USAR EL MÉTODO
+        descripcionEl.getStyle()
+            .set("font-size", "0.78rem")
+            .set("color", COLOR_TEXTO_SECUNDARIO)
+            .set("font-style", "italic")
+            .set("margin", "4px 0")
+            .set("padding", "4px 8px")
+            .set("border-left", "2px solid " + COLOR_DORADO_PRINCIPAL);
+
         Paragraph ficha = new Paragraph(libro.obtenerFichaTecnica());
         ficha.getStyle()
             .set("font-size", "0.78rem")
@@ -184,7 +193,7 @@ public class LibroCard extends Div {
             .set("gap", "10px")
             .set("flex-grow", "1");
 
-        content.add(generoBadge, tituloEl, autorEl, ficha, stockSpan, infoRow, separador, precioDiv);
+        content.add(generoBadge, tituloEl, autorEl, ficha,descripcionEl, stockSpan, infoRow, separador, precioDiv);
 
         add(cover, content);
 
