@@ -77,6 +77,9 @@ public abstract class Libro implements GestionLibro {
     }
 
     public void setCantidadPaginas(int cantidadPaginas) {
+        if(cantidadPaginas < 0) {
+            throw new IllegalArgumentException("La cantidad de páginas no puede ser negativa");
+        }
         this.cantidadPaginas = cantidadPaginas;
     }
 
@@ -85,6 +88,9 @@ public abstract class Libro implements GestionLibro {
     }
 
     public void setPrecio(double precio) {
+        if(precio < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
         this.precio = precio;
     }
 
@@ -101,6 +107,9 @@ public abstract class Libro implements GestionLibro {
     }
 
     public void setStock(int stock) {
+        if(stock < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
         this.stock = stock;
     }
 

@@ -40,7 +40,7 @@ public class LibrosView extends VerticalLayout {
     private final TextField autor = new TextField("Autor");
     private final IntegerField cantidadPaginas = new IntegerField("Páginas");
     private final NumberField precio = new NumberField("Precio");
-    private final IntegerField stock = new IntegerField("Stock disponible");
+    private final IntegerField stock = new IntegerField("Cuantas unidades desea publicar");
     private final ComboBox<String> genero = new ComboBox<>("Género");
     private final TextField campoEspecifico = new TextField();
     private final TextField imagenUrl = new TextField("URL de imagen (opcional)");

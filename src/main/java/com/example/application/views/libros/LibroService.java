@@ -20,7 +20,7 @@ public class LibroService {
     @PostConstruct
     private void cargarLibrosDeEjemplo() {
 
-        Libro tormenta = new LibroAventura(
+        Libro tormenta = new LibroFantasia(
                 "Tormenta de Espadas",
                 "Fantasía",
                 "George R.R. Martin",
